@@ -40,12 +40,10 @@
          border-radius:999px; padding:8px 12px; cursor:pointer}
   .hint{color:var(--muted); font-size:.95rem}
   .note{color:var(--muted); font-size:.9rem; margin:10px 0 4px}
-  .ok{color:var(--ok)}
-  .warn{color:var(--warn)}
-  iframe{width:100%; height:1200px; border:0; border-radius:14px; box-shadow:0 22px 60px rgba(0,0,0,.45)}
+  iframe{width:100%; height:1500px; border:0; border-radius:14px; box-shadow:0 22px 60px rgba(0,0,0,.45)}
   hr.sep{border:0;border-top:1px solid var(--stroke); margin:18px 0}
   .flex{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
-  @media (max-width:900px){ .grid{grid-template-columns:1fr} iframe{height:1280px} }
+  @media (max-width:900px){ .grid{grid-template-columns:1fr} iframe{height:1700px} }
 </style>
 </head>
 <body>
@@ -68,11 +66,11 @@
       <div class="flex" style="justify-content:space-between; align-items:center">
         <h2 id="sug" style="margin:0;font-size:1.2rem">Suggested blurbs</h2>
         <div class="bar" role="toolbar" aria-label="Suggestion actions">
-          <button class="btn" id="shuffle" aria-label="Shuffle suggestions">Shuffle</button>
-          <button class="btn ghost" id="copyAll" aria-label="Copy all suggestions">Copy all</button>
+          <button class="btn" id="shuffle" type="button" aria-label="Shuffle suggestions">Shuffle</button>
+          <button class="btn ghost" id="copyAll" type="button" aria-label="Copy all suggestions">Copy all</button>
         </div>
       </div>
-      <p class="note">These are just starters. Edit for accuracy. New options appear when you shuffle.</p>
+      <p class="note">These are starters. Edit for accuracy. New options appear when you shuffle.</p>
       <div class="grid" id="cards"></div>
     </section>
 
@@ -83,14 +81,14 @@
         <div>
           <label for="li">LinkedIn profile URL (for attribution)</label>
           <input id="li" type="url" placeholder="https://www.linkedin.com/in/your-handle" inputmode="url" aria-describedby="liHint"/>
-          <div id="liHint" class="hint">Goes into the form automatically if you use “Open form with this text”.</div>
+          <div id="liHint" class="hint">This goes into the form automatically if you use “Open form with this text”.</div>
         </div>
         <div>
           <label for="endorseText">Your endorsement text</label>
-          <textarea id="endorseText" placeholder="Paste or write your own here. You can also click 'Copy' on any card above to start."></textarea>
+          <textarea id="endorseText" placeholder="Paste or write your own here. You can also click 'Use this' on any card above to start."></textarea>
           <div class="bar" style="margin-top:8px">
-            <button class="btn small" id="openPrefilled">Open form with this text</button>
-            <button class="btn ghost small" id="copyText">Copy text</button>
+            <button class="btn small" id="openPrefilled" type="button">Open form with this text</button>
+            <button class="btn ghost small" id="copyText" type="button">Copy text</button>
           </div>
         </div>
       </div>
@@ -112,10 +110,10 @@
         <div id="amazonBox" style="display:none;margin-top:12px;padding:12px;border:1px solid var(--stroke);border-radius:12px;background:#0d1733">
           <p style="margin:0 0 8px">If you’re comfortable leaving a public rating later, here’s the direct link:</p>
           <div class="bar">
-            <a href="https://www.amazon.com/review/create-review?asin=B0FNLHKCN7" target="_blank" rel="noopener" class="btn small" aria-label="Open Amazon review page">Open Amazon review page</a>
-            <button class="btn ghost small" id="copyAmazon">Copy link</button>
+            <a id="amazonLink" href="https://www.amazon.com/review/create-review?asin=B0FNLHKCN7" target="_blank" rel="noopener" class="btn small" aria-label="Open Amazon review page">Open Amazon review page</a>
+            <button class="btn ghost small" id="copyAmazon" type="button">Copy link</button>
           </div>
-          <p class="note">Totally optional. Private form submission above is still valuable feedback.</p>
+          <p class="note">Optional. Private form submission is still valuable feedback.</p>
         </div>
       </fieldset>
     </section>
@@ -123,19 +121,18 @@
     <!-- Embedded Google Form -->
     <section aria-labelledby="formSec">
       <h2 id="formSec" class="sr">Endorsement form</h2>
-      <iframe title="Endorsement form"
-src="https://docs.google.com/forms/d/e/1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-PfROMsS73ge5Rg9SA/viewform?embedded=true&entry.2038066507=https%3A%2F%2Fwww.linkedin.com%2Fin%2F&entry.690806758=sample-text" 
-
-  width="100%"
-  height="1700"
-  frameborder="0"
-  marginheight="0"
-  marginwidth="0"
-  loading="lazy">Loading…</iframe>
-      <p class="note" style="margin-top:8px">If the form doesn’t load in your network, <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-PfROMsS73ge5Rg9SA/viewform" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+      <iframe
+        id="endorseFrame"
+        title="Endorsement form"
+        src="https://docs.google.com/forms/d/e/1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-PfROMsS73ge5Rg9SA/viewform?embedded=true"
+        loading="lazy">Loading…</iframe>
+      <p class="note" style="margin-top:8px">
+        If the form doesn’t load in your network,
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-PfROMsS73ge5Rg9SA/viewform" target="_blank" rel="noopener">open it in a new tab</a>.
+      </p>
     </section>
 
-    <!-- Guidance that encourages high-quality, specific reviews (ethically) -->
+    <!-- Guidance -->
     <section class="band" aria-labelledby="tips">
       <h2 id="tips" style="margin:0 0 10px;font-size:1.2rem">What makes a helpful endorsement?</h2>
       <ul style="margin:0 0 6px 18px">
@@ -144,44 +141,48 @@ src="https://docs.google.com/forms/d/e/1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-Pf
         <li>Keep it to 2–5 lines; substance beats length.</li>
         <li>Be candid. Nuanced, balanced notes are trusted more than superlatives.</li>
       </ul>
-      <p class="hint" style="margin:6px 0 0">Thank you for lending your voice. It helps others decide faster.</p>
+      <p class="hint" style="margin:6px 0 0">Thanks for lending your voice. It helps others decide faster.</p>
     </section>
-
   </div>
 
 <script>
-  // --- Config: your real Google Form IDs and keys ---
+  // ---- Config: your Google Form IDs and entry keys ----
+  // Base embed stays constant; we only change query params when opening a new tab.
   const FORM_ID = "1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-PfROMsS73ge5Rg9SA";
-  const ENDORSE_ENTRY_KEY = "entry.690806758";       // endorsement paragraph (from your prefilled link)
-  const LINKEDIN_ENTRY_KEY = "entry.2038066507";     // LinkedIn URL field (from your prefilled link)
-  const RATING_ENTRY_KEY = "entry.REPLACE_WITH_RATING_ID"; // TODO: replace with the entry key for the last multiple-choice question
+  const EMBED_BASE = `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?embedded=true`;
+  const VIEW_BASE  = `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?usp=pp_url`;
 
-  // --- Suggestion bank ---
+  // Replace with your actual entry keys (they come from the prefill tool)
+  const ENDORSE_ENTRY_KEY   = "entry.690806758";       // endorsement paragraph
+  const LINKEDIN_ENTRY_KEY  = "entry.2038066507";      // LinkedIn URL
+  const RATING_ENTRY_KEY    = "entry.REPLACE_WITH_RATING_ID"; // multiple-choice "Would you recommend?"
+
+  // ---- Suggestion bank ----
   const SUGGESTIONS = [
-`Practical, sober, and immediately useful. We applied Week 0 and cut time-to-response within two weeks. This reads like an operating manual, not a pitch.`,
-`Clear rails, clean receipts, weekly proof. The cadence helped us ship something real without drama. I’d hand this to any leader asking how to start.`,
-`A field guide for moving one KPI at a time. Focusing on p95, completeness, and price kept our agent honest in production.`,
-`The “ship weekly, prove daily” loop was the missing discipline. Our pilots stopped drifting and our reviews got shorter because traces told the story.`,
-`If your team keeps debating prompts, this pulls you back to outcomes. The guardrail patterns and receipt shape translated straight into our stack.`,
-`The stop rule changed our habits. We widened only when bands held 48 hours, which lowered risk and raised trust.`,
-`Readable by a CFO and a staff engineer. The pricing strip and idempotent tool contracts cut rework we didn’t know we had.`,
-`We borrowed the lane card and gate template and got a quiet, boring pilot—that’s a compliment. Less theater, more results.`,
-`Strong on governance without slowing delivery. Reason codes and residency tables kept us safe and moving.`,
-`Not hype, not hand-waving. Concrete levers to pull this week, plus the receipts to prove it worked.`,
-`The orchestration chapter alone paid for the book. Time caps, step caps, and compensation paths made incidents shorter and rarer.`,
-`We finally stopped calling everything a “model problem.” The component model and traces made causes visible and fixes obvious.`,
-`Weekly rhythm that maps to how execs decide. By Friday we knew whether to widen, pause, or revert—and why.`,
-`Memory guidance cut repeat questions by ~40%. Freshness windows and provenance became a habit, not a project.`,
-`Guardrails that run, not just live in PDFs. Denials came with reason codes people understood. Zero policy incidents in the pilot.`,
-`Technical enough to implement, disciplined enough for audit, short enough to finish before Monday stand-up.`,
-`If you need one book to launch a credible agent program, this is it. Small rails, clear receipts, proof you can defend.`,
-`We turned a vague AI initiative into a lane with a promise sentence and three bands. Simpler than it sounds, stronger than expected.`,
-`The receipts-and-traces approach changed our reviews. Less narrative, more evidence. Decisions got faster.`,
-`Double-digit uplift on a narrow slice without surprises. The 48-hour in-band rule should be an industry standard.`,
-`Every example ties to cost and risk, which made finance a partner, not a blocker.`,
-`The tool registry pattern eliminated duplicate writes in a week. Idempotency keys for the win.`,
-`From demo to dependable: one lane, one metric, receipts or it didn’t happen.`,
-`Shared vocabulary and artifacts saved us weeks. That alignment alone was worth it.`
+    `Practical, sober, and immediately useful. We applied Week 0 and cut time-to-response within two weeks. This reads like an operating manual, not a pitch.`,
+    `Clear rails, clean receipts, weekly proof. The cadence helped us ship something real without drama. I’d hand this to any leader asking how to start.`,
+    `A field guide for moving one KPI at a time. Focusing on p95, completeness, and price kept our agent honest in production.`,
+    `The “ship weekly, prove daily” loop was the missing discipline. Our pilots stopped drifting and our reviews got shorter because traces told the story.`,
+    `If your team keeps debating prompts, this pulls you back to outcomes. The guardrail patterns and receipt shape translated straight into our stack.`,
+    `The stop rule changed our habits. We widened only when bands held 48 hours, which lowered risk and raised trust.`,
+    `Readable by a CFO and a staff engineer. The pricing strip and idempotent tool contracts cut rework we didn’t know we had.`,
+    `We borrowed the lane card and gate template and got a quiet, boring pilot—that’s a compliment. Less theater, more results.`,
+    `Strong on governance without slowing delivery. Reason codes and residency tables kept us safe and moving.`,
+    `Not hype, not hand-waving. Concrete levers to pull this week, plus the receipts to prove it worked.`,
+    `The orchestration chapter alone paid for the book. Time caps, step caps, and compensation paths made incidents shorter and rarer.`,
+    `We finally stopped calling everything a “model problem.” The component model and traces made causes visible and fixes obvious.`,
+    `Weekly rhythm that maps to how execs decide. By Friday we knew whether to widen, pause, or revert—and why.`,
+    `Memory guidance cut repeat questions by ~40%. Freshness windows and provenance became a habit, not a project.`,
+    `Guardrails that run, not just live in PDFs. Denials came with reason codes people understood. Zero policy incidents in the pilot.`,
+    `Technical enough to implement, disciplined enough for audit, short enough to finish before Monday stand-up.`,
+    `If you need one book to launch a credible agent program, this is it. Small rails, clear receipts, proof you can defend.`,
+    `We turned a vague AI initiative into a lane with a promise sentence and three bands. Simpler than it sounds, stronger than expected.`,
+    `The receipts-and-traces approach changed our reviews. Less narrative, more evidence. Decisions got faster.`,
+    `Double-digit uplift on a narrow slice without surprises. The 48-hour in-band rule should be an industry standard.`,
+    `Every example ties to cost and risk, which made finance a partner, not a blocker.`,
+    `The tool registry pattern eliminated duplicate writes in a week. Idempotency keys for the win.`,
+    `From demo to dependable: one lane, one metric, receipts or it didn’t happen.`,
+    `Shared vocabulary and artifacts saved us weeks. That alignment alone was worth it.`
   ];
 
   function sample(n){
@@ -199,9 +200,9 @@ src="https://docs.google.com/forms/d/e/1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-Pf
     div.className = 'card';
     const p = document.createElement('p'); p.textContent = text;
     const row = document.createElement('div'); row.className = 'row';
-    const useBtn = document.createElement('button'); useBtn.className = 'btn small'; useBtn.textContent = 'Use this';
-    useBtn.onclick = () => { document.getElementById('endorseText').value = text; };
-    const copyBtn = document.createElement('button'); copyBtn.className = 'btn ghost small'; copyBtn.textContent = 'Copy';
+    const useBtn = document.createElement('button'); useBtn.className = 'btn small'; useBtn.type = 'button'; useBtn.textContent = 'Use this';
+    useBtn.onclick = () => { document.getElementById('endorseText').value = text; window.scrollTo({top:0,behavior:'smooth'}); };
+    const copyBtn = document.createElement('button'); copyBtn.className = 'btn ghost small'; copyBtn.type = 'button'; copyBtn.textContent = 'Copy';
     copyBtn.onclick = async () => {
       try { await navigator.clipboard.writeText(text); copyBtn.textContent = 'Copied'; setTimeout(()=>copyBtn.textContent='Copy',1200);} catch(e){}
     };
@@ -216,8 +217,8 @@ src="https://docs.google.com/forms/d/e/1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-Pf
     sample(3).forEach(t => cards.appendChild(card(t)));
   }
 
-  // Buttons
   document.addEventListener('DOMContentLoaded', () => {
+    // Initial suggested blurbs
     render();
     document.getElementById('shuffle').onclick = render;
 
@@ -230,36 +231,37 @@ src="https://docs.google.com/forms/d/e/1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-Pf
       try { await navigator.clipboard.writeText(document.getElementById('endorseText').value || ''); } catch(e){}
     };
 
-    // Recommendation radios -> show/hide Amazon link
+    // Amazon link toggling
     const radios = document.querySelectorAll('input[name="rec"]');
     const amazonBox = document.getElementById('amazonBox');
     radios.forEach(r => r.addEventListener('change', () => {
-      amazonBox.style.display = (r.value === 'Very likely' && r.checked) ? 'block' : (amazonBox.querySelector('a') ? 'none' : 'none');
+      amazonBox.style.display = (r.value === 'Very likely' && r.checked) ? 'block' : 'none';
     }));
 
     document.getElementById('copyAmazon').onclick = async () => {
       try { await navigator.clipboard.writeText('https://www.amazon.com/review/create-review?asin=B0FNLHKCN7'); } catch(e){}
     };
 
-    // Open prefilled form with endorsement + LinkedIn + optional rating
+    // Open prefilled form (new tab) with endorsement + LinkedIn + optional rating
     document.getElementById('openPrefilled').onclick = () => {
-      const base = `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?usp=pp_url`;
       const txt = document.getElementById('endorseText').value || '';
       const li  = document.getElementById('li').value || '';
       const sel = document.querySelector('input[name="rec"]:checked');
       const rating = sel ? sel.value : '';
 
-      // Build query params safely
-      const params = [];
-      if (ENDORSE_ENTRY_KEY && txt) params.push(`${encodeURIComponent(ENDORSE_ENTRY_KEY)}=${encodeURIComponent(txt)}`);
-      if (LINKEDIN_ENTRY_KEY && li) params.push(`${encodeURIComponent(LINKEDIN_ENTRY_KEY)}=${encodeURIComponent(li)}`);
+      const params = new URLSearchParams();
+      if (ENDORSE_ENTRY_KEY && txt) params.set(ENDORSE_ENTRY_KEY, txt);
+      if (LINKEDIN_ENTRY_KEY && li) params.set(LINKEDIN_ENTRY_KEY, li);
       if (RATING_ENTRY_KEY && rating && !RATING_ENTRY_KEY.includes('REPLACE_WITH_RATING_ID')){
-        params.push(`${encodeURIComponent(RATING_ENTRY_KEY)}=${encodeURIComponent(rating)}`);
+        params.set(RATING_ENTRY_KEY, rating);
       }
-
-      const url = base + (params.length ? '&' + params.join('&') : '');
+      const url = VIEW_BASE + (params.toString() ? '&' + params.toString() : '');
       window.open(url, '_blank', 'noopener');
     };
+
+    // Ensure the embedded frame always uses the safe embed endpoint
+    const frame = document.getElementById('endorseFrame');
+    frame.src = EMBED_BASE; // no prefill in embed; keeps it stable and public
   });
 </script>
 </body>
