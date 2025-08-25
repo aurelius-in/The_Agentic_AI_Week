@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Review / Endorse: “The Agentic AI Week”</title>
+<meta name="description" content="Share a short, honest endorsement for 'The Agentic AI Week'. Pick a suggestion, tweak it, and submit via the embedded form. Optional: if you’d likely recommend it, open the Amazon review page."/>
+<style>
+  :root{
+    --bg:#0b1020; --panel:#0e1630; --ink:#e9eef7; --muted:#a8b3c7;
+    --stroke:#273355; --hi:#fe3bd3; --hi2:#5ac8ff; --ok:#37d67a; --warn:#ffd166;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 700px at 20% -10%, #10214a 0%, #0b1020 40%, #081022 100%); color:var(--ink);
+       font:16px/1.55 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif}
+  .wrap{max-width:1100px;margin:0 auto;padding:28px}
+  header{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+  header h1{margin:0;font-size:1.9rem;letter-spacing:.2px}
+  header p{margin:0;color:var(--muted)}
+  .band{border:1px solid var(--stroke); background:linear-gradient(180deg, #0f1a38, #0d152d);
+        border-radius:14px; padding:16px; margin:18px 0}
+  .sr{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:6px 0 0}
+  .btn{border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:650;
+       color:#0b1020;background:linear-gradient(90deg,var(--hi),var(--hi2))}
+  .btn.ghost{background:#151b32;color:var(--ink);border:1px solid var(--stroke)}
+  .btn.small{padding:8px 12px;border-radius:8px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0 18px}
+  .card{background:var(--panel); border:1px solid var(--stroke); border-radius:14px; padding:14px; display:flex; flex-direction:column; gap:12px; min-height:180px}
+  .card p{margin:0}
+  .row{display:flex;gap:8px;flex-wrap:wrap}
+  label{display:block;margin:0 0 6px}
+  input[type="url"], textarea{width:100%;background:#0b142c;color:var(--ink);border:1px solid var(--stroke);
+       border-radius:10px;padding:10px 12px}
+  textarea{min-height:110px;resize:vertical}
+  fieldset{border:1px solid var(--stroke); border-radius:12px; padding:12px; margin:0}
+  legend{padding:0 6px; color:var(--muted)}
+  .radios{display:flex; flex-wrap:wrap; gap:10px}
+  .radio{display:flex; align-items:center; gap:8px; background:#0c1430; border:1px solid var(--stroke);
+         border-radius:999px; padding:8px 12px; cursor:pointer}
+  .hint{color:var(--muted); font-size:.95rem}
+  .note{color:var(--muted); font-size:.9rem; margin:10px 0 4px}
+  .ok{color:var(--ok)}
+  .warn{color:var(--warn)}
+  iframe{width:100%; height:1200px; border:0; border-radius:14px; box-shadow:0 22px 60px rgba(0,0,0,.45)}
+  hr.sep{border:0;border-top:1px solid var(--stroke); margin:18px 0}
+  .flex{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+  @media (max-width:900px){ .grid{grid-template-columns:1fr} iframe{height:1280px} }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header aria-labelledby="title">
+      <h1 id="title">Review / Endorse: “The Agentic AI Week”</h1>
+      <p class="hint">Pick a starting blurb below, tweak it to reflect your honest view, then submit the embedded form. ~3–5 minutes.</p>
+    </header>
+
+    <!-- Ethics & clarity -->
+    <div class="band" role="region" aria-label="Purpose and privacy">
+      <p style="margin:0">
+        Endorsements help other readers decide quickly. Please be candid, specific, and fair.
+        Your name and profile are collected for attribution only. No obligation to be positive.
+      </p>
+    </div>
+
+    <!-- Rotating suggestions -->
+    <section class="band" aria-labelledby="sug">
+      <div class="flex" style="justify-content:space-between; align-items:center">
+        <h2 id="sug" style="margin:0;font-size:1.2rem">Suggested blurbs</h2>
+        <div class="bar" role="toolbar" aria-label="Suggestion actions">
+          <button class="btn" id="shuffle" aria-label="Shuffle suggestions">Shuffle</button>
+          <button class="btn ghost" id="copyAll" aria-label="Copy all suggestions">Copy all</button>
+        </div>
+      </div>
+      <p class="note">These are just starters. Edit for accuracy. New options appear when you shuffle.</p>
+      <div class="grid" id="cards"></div>
+    </section>
+
+    <!-- Pre-fill helpers -->
+    <section class="band" aria-labelledby="prefill">
+      <h2 id="prefill" style="margin:0 0 10px;font-size:1.2rem">Pre-fill the form (optional)</h2>
+      <div class="grid" style="grid-template-columns:1fr 1fr; gap:14px">
+        <div>
+          <label for="li">LinkedIn profile URL (for attribution)</label>
+          <input id="li" type="url" placeholder="https://www.linkedin.com/in/your-handle" inputmode="url" aria-describedby="liHint"/>
+          <div id="liHint" class="hint">Goes into the form automatically if you use “Open form with this text”.</div>
+        </div>
+        <div>
+          <label for="endorseText">Your endorsement text</label>
+          <textarea id="endorseText" placeholder="Paste or write your own here. You can also click 'Copy' on any card above to start."></textarea>
+          <div class="bar" style="margin-top:8px">
+            <button class="btn small" id="openPrefilled">Open form with this text</button>
+            <button class="btn ghost small" id="copyText">Copy text</button>
+          </div>
+        </div>
+      </div>
+
+      <hr class="sep" />
+
+      <!-- Recommendation selector & conditional Amazon link -->
+      <fieldset aria-labelledby="recLegend">
+        <legend id="recLegend">Would you recommend this book to others?</legend>
+        <div class="radios" role="radiogroup" aria-label="Recommendation">
+          <label class="radio"><input type="radio" name="rec" value="Very likely" /> Very likely</label>
+          <label class="radio"><input type="radio" name="rec" value="Likely" /> Likely</label>
+          <label class="radio"><input type="radio" name="rec" value="Neutral" /> Neutral</label>
+          <label class="radio"><input type="radio" name="rec" value="Unlikely" /> Unlikely</label>
+          <label class="radio"><input type="radio" name="rec" value="Very unlikely" /> Very unlikely</label>
+        </div>
+        <p class="hint" style="margin-top:8px">This also pre-fills the form’s final multiple-choice question when you open it with your text.</p>
+
+        <div id="amazonBox" style="display:none;margin-top:12px;padding:12px;border:1px solid var(--stroke);border-radius:12px;background:#0d1733">
+          <p style="margin:0 0 8px">If you’re comfortable leaving a public rating later, here’s the direct link:</p>
+          <div class="bar">
+            <a href="https://www.amazon.com/review/create-review?asin=B0FNLHKCN7" target="_blank" rel="noopener" class="btn small" aria-label="Open Amazon review page">Open Amazon review page</a>
+            <button class="btn ghost small" id="copyAmazon">Copy link</button>
+          </div>
+          <p class="note">Totally optional. Private form submission above is still valuable feedback.</p>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- Embedded Google Form -->
+    <section aria-labelledby="formSec">
+      <h2 id="formSec" class="sr">Endorsement form</h2>
+      <iframe title="Endorsement form"
+        src="https://docs.google.com/forms/d/e/1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-PfROMsS73ge5Rg9SA/viewform?embedded=true"
+        loading="lazy"></iframe>
+      <p class="note" style="margin-top:8px">If the form doesn’t load in your network, <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-PfROMsS73ge5Rg9SA/viewform" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </section>
+
+    <!-- Guidance that encourages high-quality, specific reviews (ethically) -->
+    <section class="band" aria-labelledby="tips">
+      <h2 id="tips" style="margin:0 0 10px;font-size:1.2rem">What makes a helpful endorsement?</h2>
+      <ul style="margin:0 0 6px 18px">
+        <li>Mention one concrete outcome or practice you found credible or applied, even in a pilot.</li>
+        <li>Use plain language someone outside your team would understand.</li>
+        <li>Keep it to 2–5 lines; substance beats length.</li>
+        <li>Be candid. Nuanced, balanced notes are trusted more than superlatives.</li>
+      </ul>
+      <p class="hint" style="margin:6px 0 0">Thank you for lending your voice. It helps others decide faster.</p>
+    </section>
+
+  </div>
+
+<script>
+  // --- Config: your real Google Form IDs and keys ---
+  const FORM_ID = "1FAIpQLSe5hq_n1QF1k6SAifHMXMYv4u8IidCF-PfROMsS73ge5Rg9SA";
+  const ENDORSE_ENTRY_KEY = "entry.690806758";       // endorsement paragraph (from your prefilled link)
+  const LINKEDIN_ENTRY_KEY = "entry.2038066507";     // LinkedIn URL field (from your prefilled link)
+  const RATING_ENTRY_KEY = "entry.REPLACE_WITH_RATING_ID"; // TODO: replace with the entry key for the last multiple-choice question
+
+  // --- Suggestion bank ---
+  const SUGGESTIONS = [
+`Practical, sober, and immediately useful. We applied Week 0 and cut time-to-response within two weeks. This reads like an operating manual, not a pitch.`,
+`Clear rails, clean receipts, weekly proof. The cadence helped us ship something real without drama. I’d hand this to any leader asking how to start.`,
+`A field guide for moving one KPI at a time. Focusing on p95, completeness, and price kept our agent honest in production.`,
+`The “ship weekly, prove daily” loop was the missing discipline. Our pilots stopped drifting and our reviews got shorter because traces told the story.`,
+`If your team keeps debating prompts, this pulls you back to outcomes. The guardrail patterns and receipt shape translated straight into our stack.`,
+`The stop rule changed our habits. We widened only when bands held 48 hours, which lowered risk and raised trust.`,
+`Readable by a CFO and a staff engineer. The pricing strip and idempotent tool contracts cut rework we didn’t know we had.`,
+`We borrowed the lane card and gate template and got a quiet, boring pilot—that’s a compliment. Less theater, more results.`,
+`Strong on governance without slowing delivery. Reason codes and residency tables kept us safe and moving.`,
+`Not hype, not hand-waving. Concrete levers to pull this week, plus the receipts to prove it worked.`,
+`The orchestration chapter alone paid for the book. Time caps, step caps, and compensation paths made incidents shorter and rarer.`,
+`We finally stopped calling everything a “model problem.” The component model and traces made causes visible and fixes obvious.`,
+`Weekly rhythm that maps to how execs decide. By Friday we knew whether to widen, pause, or revert—and why.`,
+`Memory guidance cut repeat questions by ~40%. Freshness windows and provenance became a habit, not a project.`,
+`Guardrails that run, not just live in PDFs. Denials came with reason codes people understood. Zero policy incidents in the pilot.`,
+`Technical enough to implement, disciplined enough for audit, short enough to finish before Monday stand-up.`,
+`If you need one book to launch a credible agent program, this is it. Small rails, clear receipts, proof you can defend.`,
+`We turned a vague AI initiative into a lane with a promise sentence and three bands. Simpler than it sounds, stronger than expected.`,
+`The receipts-and-traces approach changed our reviews. Less narrative, more evidence. Decisions got faster.`,
+`Double-digit uplift on a narrow slice without surprises. The 48-hour in-band rule should be an industry standard.`,
+`Every example ties to cost and risk, which made finance a partner, not a blocker.`,
+`The tool registry pattern eliminated duplicate writes in a week. Idempotency keys for the win.`,
+`From demo to dependable: one lane, one metric, receipts or it didn’t happen.`,
+`Shared vocabulary and artifacts saved us weeks. That alignment alone was worth it.`
+  ];
+
+  function sample(n){
+    const pool = [...SUGGESTIONS];
+    const out = [];
+    while(out.length < n && pool.length){
+      const i = Math.floor(Math.random() * pool.length);
+      out.push(pool.splice(i,1)[0]);
+    }
+    return out;
+  }
+
+  function card(text){
+    const div = document.createElement('div');
+    div.className = 'card';
+    const p = document.createElement('p'); p.textContent = text;
+    const row = document.createElement('div'); row.className = 'row';
+    const useBtn = document.createElement('button'); useBtn.className = 'btn small'; useBtn.textContent = 'Use this';
+    useBtn.onclick = () => { document.getElementById('endorseText').value = text; };
+    const copyBtn = document.createElement('button'); copyBtn.className = 'btn ghost small'; copyBtn.textContent = 'Copy';
+    copyBtn.onclick = async () => {
+      try { await navigator.clipboard.writeText(text); copyBtn.textContent = 'Copied'; setTimeout(()=>copyBtn.textContent='Copy',1200);} catch(e){}
+    };
+    row.append(useBtn, copyBtn);
+    div.append(p, row);
+    return div;
+  }
+
+  function render(){
+    const cards = document.getElementById('cards');
+    cards.innerHTML = '';
+    sample(3).forEach(t => cards.appendChild(card(t)));
+  }
+
+  // Buttons
+  document.addEventListener('DOMContentLoaded', () => {
+    render();
+    document.getElementById('shuffle').onclick = render;
+
+    document.getElementById('copyAll').onclick = async () => {
+      const txt = [...document.querySelectorAll('.card p')].map(p=>p.textContent).join('\n\n');
+      try { await navigator.clipboard.writeText(txt); } catch(e){}
+    };
+
+    document.getElementById('copyText').onclick = async () => {
+      try { await navigator.clipboard.writeText(document.getElementById('endorseText').value || ''); } catch(e){}
+    };
+
+    // Recommendation radios -> show/hide Amazon link
+    const radios = document.querySelectorAll('input[name="rec"]');
+    const amazonBox = document.getElementById('amazonBox');
+    radios.forEach(r => r.addEventListener('change', () => {
+      amazonBox.style.display = (r.value === 'Very likely' && r.checked) ? 'block' : (amazonBox.querySelector('a') ? 'none' : 'none');
+    }));
+
+    document.getElementById('copyAmazon').onclick = async () => {
+      try { await navigator.clipboard.writeText('https://www.amazon.com/review/create-review?asin=B0FNLHKCN7'); } catch(e){}
+    };
+
+    // Open prefilled form with endorsement + LinkedIn + optional rating
+    document.getElementById('openPrefilled').onclick = () => {
+      const base = `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?usp=pp_url`;
+      const txt = document.getElementById('endorseText').value || '';
+      const li  = document.getElementById('li').value || '';
+      const sel = document.querySelector('input[name="rec"]:checked');
+      const rating = sel ? sel.value : '';
+
+      // Build query params safely
+      const params = [];
+      if (ENDORSE_ENTRY_KEY && txt) params.push(`${encodeURIComponent(ENDORSE_ENTRY_KEY)}=${encodeURIComponent(txt)}`);
+      if (LINKEDIN_ENTRY_KEY && li) params.push(`${encodeURIComponent(LINKEDIN_ENTRY_KEY)}=${encodeURIComponent(li)}`);
+      if (RATING_ENTRY_KEY && rating && !RATING_ENTRY_KEY.includes('REPLACE_WITH_RATING_ID')){
+        params.push(`${encodeURIComponent(RATING_ENTRY_KEY)}=${encodeURIComponent(rating)}`);
+      }
+
+      const url = base + (params.length ? '&' + params.join('&') : '');
+      window.open(url, '_blank', 'noopener');
+    };
+  });
+</script>
+</body>
+</html>
